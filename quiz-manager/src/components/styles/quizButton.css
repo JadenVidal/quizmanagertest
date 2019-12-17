@@ -1,0 +1,12 @@
+.block {
+    color: white;
+    display: block;
+    width: 80%;
+    border: none;
+    background-color: dodgerblue;
+    padding: 140px 0px;
+    font-size: 40px;
+    cursor: pointer;
+    text-align: center;
+    margin: 3% 10% 1% 10%;
+  }
