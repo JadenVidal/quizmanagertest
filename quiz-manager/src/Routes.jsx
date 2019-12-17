@@ -1,37 +1,39 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
-import LandingPage from './containers/landingPage/landingPage';
-import App from './App';
+import LandingPage from './containers/landingPage';
+import Header from './components/header';
+import HomePage from './containers/homePage';
+import SigninPage from './containers/signinPage';
+import SignupPage from './containers/signupPage';
+import ViewPage from './containers/viewPage';
+import CreatePage from './containers/createPage';
+import { getCookie } from './actions/cookie';
 
 class Routes extends Component {
   render() {
-    
     return (
-      <div>
         <BrowserRouter>
           <div>
+            <Header />
             <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <Route exact path="/home" component={App} />
+              <Route exact path="/" 
+                render={props => {
+                  if (!getCookie('session')) {
+                    return <LandingPage />;
+                  }else{
+                    return <HomePage />;
+                  }
+                }}/>
+              <Route exact path="/signin" component={SigninPage} />
+              <Route exact path="/signup" component={SignupPage} />
+              <Route exact path="/view" component={ViewPage} />
+              <Route exact path="/create/:id" component={CreatePage} />
               <Redirect to="/" />
             </Switch>
           </div>
         </BrowserRouter>
-      </div>
     );
   }
 }
 
-
-const mapStateToProps = state => {
-  return {
-    // pdp: state.pdp
-  };
-};
-
-
-export default connect(
-  mapStateToProps,
-  null
-)(Routes);
+export default Routes;

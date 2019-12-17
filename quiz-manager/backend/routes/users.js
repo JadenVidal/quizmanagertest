@@ -8,11 +8,18 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//get single user by id
+router.route('/:id').get((req, res) => {
+  User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 //get user by username + password
 router.route('/:username/:password').get((req, res) => {
     User.findOne({"username": req.params.username, "password": req.params.password})
-      .then(user => res.json(user))
-      .catch(err => res.status(400).json('Error: ' + err));
+      .then(user => res.json(user), console.log("GOOD"))
+      .catch(err => res.status(400).json('Error: ' + err), console.log("BAD"));
   });
 
 //add user
