@@ -10,7 +10,7 @@ export default class HomePage extends Component {
     const userAccess = await getUserType()
     this.setState({
       userType: userAccess
-  })
+    })
   };
 
   constructor(props) {
@@ -22,11 +22,18 @@ export default class HomePage extends Component {
   }
 
   render() {
-
     return (
       <div >
-        <ViewQuizButton />
-        <CreateQuizButton />
+        {this.state.userType === 'top' ? (
+          <div>
+            <ViewQuizButton />
+            <CreateQuizButton />
+          </div>
+        ) : (
+            <div>
+              <ViewQuizButton />
+            </div>
+          )}
       </div>
     );
   }

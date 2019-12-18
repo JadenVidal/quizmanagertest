@@ -46,11 +46,11 @@ export default class ViewPage extends Component {
     console.log(quizes)
     return (
       <div >
-      {userQuizes.map((quiz, index) => (
-        <span key={index}>
-        <p key={quiz._id}>{quiz.questions[0].question}</p>
-        </span>
-       ))}
+        {userQuizes.map((quiz, index) => (
+            <span key={index}>
+            <p key={quiz._id}>{quiz.questions[0].question}</p>
+            </span>
+        ))}
       </div>
     );
   }
