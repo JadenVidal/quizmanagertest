@@ -8,6 +8,13 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//get quiz by school
+router.route('/:username/:school').get((req, res) => {
+  Quiz.find({"school": req.params.school, "scope": "public", "username": { $ne : req.params.username }})
+    .then(quiz => res.json(quiz))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 //get quiz by username
 router.route('/:username').get((req, res) => {
     Quiz.find({"username": req.params.username})
@@ -20,9 +27,10 @@ router.route('/add').post((req, res) => {
   const name = req.body.name;
   const scope = req.body.scope;
   const username = req.body.username;
+  const school = req.body.school;
   const questions = req.body.questions;
 
-  const newQuiz = new Quiz({name, scope, username, questions});
+  const newQuiz = new Quiz({name, scope, username, school, questions});
 
   newQuiz.save()
     .then(() => res.json('Quiz added!'))

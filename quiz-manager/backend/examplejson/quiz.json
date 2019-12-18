@@ -1,6 +1,7 @@
 {
-	"name": "jadentestquiz",
+	"name": "Test Quiz",
 	"scope": "private",
-	"username": "usernamejaden",
+	"username": "username",
+	"school": "Test School",
 	"questions": [{"question": "what is question one", "listofanswers": ["answerone", "answertwo", "answerthree"]}]
 }

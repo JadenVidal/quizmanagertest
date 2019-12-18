@@ -12,6 +12,7 @@ const quizSchema = new Schema({
   name: { type: String, unique: true },
   scope: { type: String },
   username: { type: String },
+  school: { type: String },
   questions: [{ type: questionSchema }]
 }, {
   timestamps: true,

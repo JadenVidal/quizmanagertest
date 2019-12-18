@@ -11,7 +11,7 @@ class Header extends Component {
   render() {
     if(!getCookie('session')){
           return ( 
-      <div class="header">
+      <div className="header">
         <a href="/" className="logo">Quiz Manager</a>
         <div className="header-right">
           <a className="active" href="/signin">Sign In</a>

@@ -22,6 +22,24 @@ import Api from '../services/api'
     }
   }
 
+  const getUserFromId = async (id) => {
+    try {
+      let response = await Api.get(`users/${id}`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const getSchoolFromUserKey = async (userKey) => {
+    try {
+        let response = await Api.get(`schools/key/${userKey}`)
+        return response.data[0].name 
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const getSchoolKeysFromUserKey = async (userKey) => {
     try {
         let response = await Api.get(`schools/key/${userKey}`)
@@ -51,4 +69,4 @@ import Api from '../services/api'
     return type
   }
     
-export { getUserType }
+export { getUserType, getUserFromId, getSchoolFromUserKey }
