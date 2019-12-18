@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Api from '../services/api';
-import { setCookie } from '../actions/cookie'
 
 export default class SignupPage extends Component {
     constructor(props) {
@@ -54,15 +53,26 @@ export default class SignupPage extends Component {
                 password: btoa(this.state.password),
                 key: this.state.key
             }
-            Api.post('/users/add', user)
+            Api.get(`/schools/key/${user.key}`)
                 .then(response => {
-                    if(response.data !== null){
-                        setCookie("session", response.data._id, 86400)
-                        window.location.replace("/home")
+                    if(response.data[0] !== undefined){ 
+                        Api.post('/users/add', user)
+                        .then(response => {
+                            if(response.data === "User added!"){
+                                this.setState({
+                                    message: 'User Created! Please Sign In'
+                                })
+                            }
+                        })
+                        .catch(error => {
+                            this.setState({
+                                message: error.response.data
+                            })
+                        });
                     } else {
                         this.setState({
-                            password: '',
-                            message: 'User not found'
+                            key: '',
+                            message: 'School Key not valid please try again'
                         })
                     }
                 })
