@@ -43,24 +43,23 @@ export default class ViewPage extends Component {
   }
 
   render() {
-    var userQuizes = this.state.userQuizes
-    var quizes = this.state.quizes
+      
+    var userQuizes = this.state.userQuizes.slice(0).reverse()
+    var quizes = this.state.quizes.slice(0).reverse()
 
-    console.log(userQuizes)
-    console.log(quizes)
     return (
       <div >
         <h2 Style="margin-left: 10%;">Your Quizes</h2>
         {userQuizes.map((quiz, index) => (
             <span key={index}>
-            <QuizDisplay key={quiz._id} quiz={quiz} index={index}/>
+            <QuizDisplay key={quiz._id} quiz={quiz} index={index} access={this.state.userType}/>
             </span>
         ))}
 
         <h2 Style="margin-left: 10%;">Other Quizes</h2>
         {quizes.map((quiz, index) => (
             <span key={index}>
-            <QuizDisplay key={quiz._id} quiz={quiz} index={index}/>
+            <QuizDisplay key={quiz._id} quiz={quiz} index={index} access={this.state.userType}/>
             </span>
         ))}
       </div>

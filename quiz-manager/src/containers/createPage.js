@@ -54,13 +54,11 @@ export default class CreatePage extends Component {
     this.setState({
       scope: e.target.value
     })
-    console.log(this.state.scope)
   }
 
   onChangeAnswer(event, index) {
     let newArray = this.state.answers
     newArray[index] = event.target.value
-    console.log(newArray)
     this.setState({
       answers: newArray
     })
@@ -86,6 +84,7 @@ export default class CreatePage extends Component {
               scope: 'private',
               message: 'Quiz Created'
             })
+            //redirect to view page
         }
     })
     .catch(error => {

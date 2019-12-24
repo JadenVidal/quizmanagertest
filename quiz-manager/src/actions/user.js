@@ -58,7 +58,6 @@ import Api from '../services/api'
             type = "top"
             break;
         case 1:
-            console.log("THISSSSSSS")
             type = "mid";
             break;
         case 2: 

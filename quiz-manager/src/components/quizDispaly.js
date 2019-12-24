@@ -1,32 +1,84 @@
 import React, { Component } from 'react';
 import './styles/quizDisplay.css';
 
-// var redirectToViewPage = () => {
-//     window.location.replace("/view");
-//   }
-
 class QuizDisplay extends Component {
 
-  render() {
-      let displayStyle = ""
-      if(this.props.index%2 === 0){
-         displayStyle = "highlight"
-      } else {  displayStyle = "none" }
-      return ( 
-            // <button onClick={redirectToViewPage} type="button" className="block">View Quizes</button>
-            <div className={displayStyle}>
-                <h3>{this.props.quiz.name}</h3>
-                <p>Created by: {this.props.quiz.username}</p>
-                <p>Question: {this.props.quiz.questions[0].question}</p>
-                <p>Correct Answer: {this.props.quiz.questions[0].listofanswers[0]}</p>
-                <p>Incorrect Answers:</p>
-                <p>{this.props.quiz.questions[0].listofanswers[1]}</p>
-                <p>{this.props.quiz.questions[0].listofanswers[2]}</p>
-                <p>{this.props.quiz.questions[0].listofanswers[3]}</p>
-            </div>
-      ) 
-    }
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      stateOfQuiz: ""
+    }
   }
+
+  render() {
+    const date = new Date(this.props.quiz.updatedAt).toUTCString()
+    let displayStyle = ""
+    if (this.props.index % 2 === 0) {
+      displayStyle = "highlight"
+    } else { displayStyle = "none" }
+    if (this.props.userType === "mid") {
+      return (
+        <div className={displayStyle}>
+          <h3>{this.props.quiz.name}</h3>
+          <p>Created by: {this.props.quiz.username}</p>
+          <br />
+          {this.props.quiz.questions.map((question, index) => (
+            <span key={index}>
+              <p>Question: {question.question}</p>
+              <p>Correct Answer: {question.listofanswers[0]}</p>
+              <p>Incorrect Answers:</p>
+              <p>{question.listofanswers[1]}</p>
+              <p>{question.listofanswers[2]}</p>
+              <p>{question.listofanswers[3]}</p>
+              <br />
+            </span>
+          ))}
+          <br />
+          <p>{date}</p>
+        </div>
+      )
+    } else if (this.props.userType === "low") {
+      return (
+        <div className={displayStyle}>
+          <h3>{this.props.quiz.name}</h3>
+          <p>Created by: {this.props.quiz.username}</p>
+          <br />
+          {this.props.quiz.questions.map((question, index) => (
+            <span key={index}>
+              <p>Question: {question.question}</p>
+              <br />
+            </span>
+          ))}
+          <br />
+          <p>{date}</p>
+        </div>
+      )
+    } else {
+      return (
+        <div className={displayStyle}>
+          <h3>{this.props.quiz.name}</h3>
+          <p>Created by: {this.props.quiz.username}</p>
+          <br />
+          {this.props.quiz.questions.map((question, index) => (
+            <span key={index}>
+              <p>Question: {question.question}</p>
+              <p>Correct Answer: {question.listofanswers[0]}</p>
+              <p>Incorrect Answers:</p>
+              <p>{question.listofanswers[1]}</p>
+              <p>{question.listofanswers[2]}</p>
+              <p>{question.listofanswers[3]}</p>
+              <br />
+            </span>
+          ))}
+          <br />
+          <p>{date}</p>
+          <button>EDIT</button>
+        </div>
+      )
+    }
+  }
+
+}
 
 export default (QuizDisplay);

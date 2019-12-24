@@ -51,6 +51,19 @@ router.route('/:field/:quiz_id').put((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+//update quiz id
+router.route('/:quiz_id').put((req, res) => {
+  Quiz.findById(req.params.quiz_id)
+    .then(quiz => {
+      quiz = req.body;
+
+      quiz.save()
+        .then(() => res.json('Quiz updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
    //delete by id 
    router.route('/:id').delete((req, res) => {
     Quiz.findByIdAndDelete(req.params.id)
