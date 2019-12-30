@@ -56,7 +56,7 @@ export default class ViewPage extends Component {
             </span>
         ))}
 
-        <h2 Style="margin-left: 10%;">Other Quizes</h2>
+        <h2 Style="margin-left: 10%;">Other Users Quizes</h2>
         {quizes.map((quiz, index) => (
             <span key={index}>
             <QuizDisplay key={quiz._id} quiz={quiz} index={index} access={this.state.userType}/>

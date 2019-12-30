@@ -1,29 +1,7 @@
 import React, { Component } from 'react';
-import { getCookie } from '../actions/cookie'
-import { getUserFromId, getSchoolFromUserKey } from '../actions/user';
 import Api from '../services/api';
 
-export default class CreatePage extends Component {
-
-  async componentDidMount() {
-    const id = getCookie('session')
-    if (!id) {
-      window.location.replace("/")
-    }
-    const user = await getUserFromId(id)
-    const school = await getSchoolFromUserKey(user.key)
-    this.setState({
-      user: user,
-      school: school
-    })
-
-    if(this.props.quiz){
-      this.setState({
-        nameOfQuiz: this.props.quiz.name,
-        listOfQuestions: this.props.quiz.listOfQuestions
-      })
-    }
-  };
+export default class QuizEdit extends Component {
 
   constructor(props) {
     super(props);
@@ -36,12 +14,10 @@ export default class CreatePage extends Component {
     this.addQuestion = this.addQuestion.bind(this);
 
       this.state = {
-        nameOfQuiz: "",
-        listOfQuestions: [{ question: "", listofanswers: ['', '', '', ''] }],
-        scope: 'private',
-        user: '',
-        school: '',
-        message: ''
+        nameOfQuiz: this.props.quiz.name,
+        listOfQuestions: this.props.quiz.questions,
+        scope: this.props.quiz.scope,
+        user: this.props.quiz.username
       }
   }
 
@@ -88,20 +64,13 @@ export default class CreatePage extends Component {
     const quiz = {
       name: this.state.nameOfQuiz,
       scope: this.state.scope,
-      username: this.state.user.username,
-      school: this.state.school,
+      username: this.state.user,
       questions: this.state.listOfQuestions
     }
-    Api.post('/quiz/add', quiz)
+    Api.put(`/quiz/${this.props.quiz._id}`, quiz)
       .then(response => {
-        if (response.data === "Quiz added!") {
-          this.setState({
-            nameOfQuiz: "",
-            listOfQuestions: [{ question: "", listofanswers: ['', '', '', ''] }],
-            scope: 'private',
-            message: 'Quiz Created'
-          })
-          //redirect to view page
+        if (response.data === "Quiz updated!") {
+          this.props.onSave()
         }
       })
       .catch(error => {
@@ -191,7 +160,7 @@ export default class CreatePage extends Component {
       </label>
           </div>
           <div className="form-group">
-            <input type="submit" value="Sumbit" className="btn btn-primary" />
+            <input type="submit" value="Save" className="btn btn-primary" />
           </div>
         </form>
 

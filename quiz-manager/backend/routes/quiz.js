@@ -51,11 +51,15 @@ router.route('/:field/:quiz_id').put((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
-//update quiz id
+//update quiz by id
 router.route('/:quiz_id').put((req, res) => {
   Quiz.findById(req.params.quiz_id)
     .then(quiz => {
-      quiz = req.body;
+
+      quiz.name = req.body.name
+      quiz.scope = req.body.scope
+      quiz.username = req.body.username
+      quiz.questions = req.body.questions
 
       quiz.save()
         .then(() => res.json('Quiz updated!'))

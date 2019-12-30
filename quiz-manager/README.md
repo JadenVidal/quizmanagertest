@@ -2,10 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## FRONT END
 
-In the project directory, you can run:
+In the project directory (quiz-manager), you can run:
 
-### `yarn start`
-
+### `yarn start` 
+(ensure you are using a node version higher than 8.3)
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -18,6 +18,7 @@ Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ## BACK END
+cd into the backend folder then 
 
 ### `NODEMON SERVER`
 

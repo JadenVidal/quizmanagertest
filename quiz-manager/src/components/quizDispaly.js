@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import QuizEdit from './quizEdit'
 import './styles/quizDisplay.css';
 
 class QuizDisplay extends Component {
@@ -6,9 +7,25 @@ class QuizDisplay extends Component {
   constructor(props) {
     super(props);
 
+    this.editQuiz = this.editQuiz.bind(this);
+    this.onSave = this.onSave.bind(this);
+
     this.state = {
       stateOfQuiz: ""
     }
+  }
+
+  editQuiz = () => {
+    this.setState({
+      stateOfQuiz: "edit"
+    })
+  }
+
+  onSave = () => {
+    this.setState({
+      stateOfQuiz: ""
+    })
+    window.location.reload();
   }
 
   render() {
@@ -54,6 +71,10 @@ class QuizDisplay extends Component {
           <p>{date}</p>
         </div>
       )
+    } else if (this.state.stateOfQuiz === "edit"){
+      return (
+      <QuizEdit quiz={this.props.quiz} onSave={this.onSave}/>
+      )
     } else {
       return (
         <div className={displayStyle}>
@@ -71,9 +92,8 @@ class QuizDisplay extends Component {
               <br />
             </span>
           ))}
-          <br />
           <p>{date}</p>
-          <button>EDIT</button>
+          <button onClick={this.editQuiz}>EDIT</button>
         </div>
       )
     }
