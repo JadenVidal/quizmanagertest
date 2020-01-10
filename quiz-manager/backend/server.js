@@ -11,12 +11,10 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-);
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
-})
+//will need updating when sending off
+mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+.then(() => console.log('MongoDB database connection established successfully'))
+.catch(err => {console.log(`DB Connection Error: ${err.message}`)});
 
 const schoolsRouter = require('./routes/schools');
 const usersRouter = require('./routes/users');

@@ -25,4 +25,4 @@ Runs the back end server in the development mode.<br />
 This will run at [http://localhost:5000]
 
 #### .env
-you will need to create a `.env` file within the backend folder containing the key from atlas  `ATLAS_URI=<mongodbkey>` 
+An `.env` file within the backend folder containing the key from atlas  `ATLAS_URI=<mongodbkey>` to access the collection.

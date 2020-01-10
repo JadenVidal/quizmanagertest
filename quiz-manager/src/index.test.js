@@ -44,6 +44,4 @@ describe('App component', () => {
         const tree = renderer.create(<App />).toJSON();
         expect(tree).toMatchSnapshot();
       });
-
-    
 });

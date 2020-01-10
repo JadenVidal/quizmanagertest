@@ -18,7 +18,7 @@ class Routes extends Component {
             <p>Count: 0</p>
             <Switch>
               <Route exact path="/" 
-                render={props => {
+                render={() => {
                   if (!getCookie('session')) {
                     return <LandingPage />;
                   }else{
