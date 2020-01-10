@@ -52,7 +52,7 @@ export default class ViewPage extends Component {
         <h2 Style="margin-left: 10%;">Your Quizes</h2>
         {userQuizes.map((quiz, index) => (
             <span key={index}>
-            <QuizDisplay key={quiz._id} quiz={quiz} index={index} access={this.state.userType}/>
+            <QuizDisplay key={quiz._id} quiz={quiz} index={index} access={this.state.userType} />
             </span>
         ))}
 

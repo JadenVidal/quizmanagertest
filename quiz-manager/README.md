@@ -14,8 +14,7 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If the tests fail on snapshots, press `u` to create new versions of the snapshots to run against
 
 ## BACK END
 cd into the backend folder then 

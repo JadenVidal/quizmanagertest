@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/quizButton.css';
 import Api from '../services/api';
 
 export default class QuizEdit extends Component {
@@ -12,13 +13,40 @@ export default class QuizEdit extends Component {
     this.onChangeScope = this.onChangeScope.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
+    this.deleteQuestion = this.deleteQuestion.bind(this);
+    this.deleteQuiz = this.deleteQuiz.bind(this);
 
-      this.state = {
-        nameOfQuiz: this.props.quiz.name,
-        listOfQuestions: this.props.quiz.questions,
-        scope: this.props.quiz.scope,
-        user: this.props.quiz.username
-      }
+    this.state = {
+      nameOfQuiz: this.props.quiz.name,
+      listOfQuestions: this.props.quiz.questions,
+      scope: this.props.quiz.scope,
+      user: this.props.quiz.username
+    }
+  }
+
+
+  deleteQuestion = (index) => {
+    let newStateArr = this.state.listOfQuestions
+    newStateArr.splice(index, 1)
+    this.setState({
+      listOfQuestions: newStateArr
+    })
+  }
+
+  deleteQuiz(e) {
+    e.preventDefault();
+
+    Api.delete(`/quiz/${this.props.quiz._id}`)
+      .then(response => {
+        if (response.data === "Quiz deleted.") {
+          this.props.onSave()
+        }
+      })
+      .catch(error => {
+        this.setState({
+          message: error.response.data
+        })
+      });
   }
 
   addQuestion = () => {
@@ -84,7 +112,6 @@ export default class QuizEdit extends Component {
     var listOfQuestions = this.state.listOfQuestions
     return (
       <div >
-        <h3>Create Quiz</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Name of Quiz: </label>
@@ -95,9 +122,9 @@ export default class QuizEdit extends Component {
               onChange={this.onChangeNameOfQuiz}
             />
           </div>
-          <br />
           {listOfQuestions.map((question, index) => (
             <div className="form-group">
+              <br />
               <label>Question: </label>
               <input type="text"
                 required
@@ -139,11 +166,15 @@ export default class QuizEdit extends Component {
                   )
               ))}
               <br />
+              {this.state.listOfQuestions.length > 1 &&
+                <button className="delButton" type="button" onClick={() => this.deleteQuestion(index)}><span>Remove Question</span></button>
+              }
             </div>
           ))}
-          <button onClick={this.addQuestion}>Add Question</button>
           <br />
+          <button className="button" onClick={this.addQuestion}><span>Add Question</span></button>
           <div className="radio">
+          <br />
             <label>
               <input type="radio" value="private"
                 checked={this.state.scope === 'private'}
@@ -159,11 +190,13 @@ export default class QuizEdit extends Component {
               Public
       </label>
           </div>
+          <br />
           <div className="form-group">
-            <input type="submit" value="Save" className="btn btn-primary" />
+            <input className="button" type="submit" value="Save" />
           </div>
         </form>
-
+        <br />
+        <button className="delButton" onClick={this.deleteQuiz}><span>DELETE QUIZ</span></button>
         <p>{this.state.message}</p>
       </div>
     );

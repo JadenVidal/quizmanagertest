@@ -15,6 +15,7 @@ class Routes extends Component {
         <BrowserRouter>
           <div>
             <Header />
+            <p>Count: 0</p>
             <Switch>
               <Route exact path="/" 
                 render={props => {

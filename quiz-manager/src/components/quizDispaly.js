@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuizEdit from './quizEdit'
 import './styles/quizDisplay.css';
+import './styles/quizButton.css';
 
 class QuizDisplay extends Component {
 
@@ -25,7 +26,7 @@ class QuizDisplay extends Component {
     this.setState({
       stateOfQuiz: ""
     })
-    window.location.reload();
+    window.location.replace("/view")
   }
 
   render() {
@@ -73,7 +74,9 @@ class QuizDisplay extends Component {
       )
     } else if (this.state.stateOfQuiz === "edit"){
       return (
-      <QuizEdit quiz={this.props.quiz} onSave={this.onSave}/>
+      <div className={displayStyle}>
+        <QuizEdit quiz={this.props.quiz} onSave={this.onSave}/>
+      </div>
       )
     } else {
       return (
@@ -92,8 +95,8 @@ class QuizDisplay extends Component {
               <br />
             </span>
           ))}
-          <p>{date}</p>
-          <button onClick={this.editQuiz}>EDIT</button>
+          <p>Last Updated: {date}</p>
+          <button className="button" onClick={this.editQuiz}><span>EDIT</span></button>
         </div>
       )
     }

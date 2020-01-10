@@ -17,7 +17,7 @@ export default class CreatePage extends Component {
       school: school
     })
 
-    if(this.props.quiz){
+    if (this.props.quiz) {
       this.setState({
         nameOfQuiz: this.props.quiz.name,
         listOfQuestions: this.props.quiz.listOfQuestions
@@ -34,15 +34,24 @@ export default class CreatePage extends Component {
     this.onChangeScope = this.onChangeScope.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
+    this.deleteQuestion = this.deleteQuestion.bind(this);
 
-      this.state = {
-        nameOfQuiz: "",
-        listOfQuestions: [{ question: "", listofanswers: ['', '', '', ''] }],
-        scope: 'private',
-        user: '',
-        school: '',
-        message: ''
-      }
+    this.state = {
+      nameOfQuiz: "",
+      listOfQuestions: [{ question: "", listofanswers: ['', '', '', ''] }],
+      scope: 'private',
+      user: '',
+      school: '',
+      message: ''
+    }
+  }
+
+  deleteQuestion = (index) => {
+    let newStateArr = this.state.listOfQuestions
+    newStateArr.splice(index, 1)
+    this.setState({
+      listOfQuestions: newStateArr
+    })
   }
 
   addQuestion = () => {
@@ -170,6 +179,9 @@ export default class CreatePage extends Component {
                   )
               ))}
               <br />
+              {this.state.listOfQuestions.length > 1 &&
+                <button type="button" onClick={() => this.deleteQuestion(index)}>Remove Question</button>
+              }
             </div>
           ))}
           <button onClick={this.addQuestion}>Add Question</button>
