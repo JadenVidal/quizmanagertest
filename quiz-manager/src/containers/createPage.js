@@ -125,82 +125,49 @@ export default class CreatePage extends Component {
     return (
       <div >
         <h3>Create Quiz</h3>
+
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Name of Quiz: </label>
-            <input type="text"
-              required
-              className="form-control"
-              value={this.state.nameOfQuiz}
-              onChange={this.onChangeNameOfQuiz}
-            />
+            <input type="text" required className="form-control" value={this.state.nameOfQuiz} onChange={this.onChangeNameOfQuiz} />
           </div>
           <br />
+
           {listOfQuestions.map((question, index) => (
             <div className="form-group">
               <label>Question: </label>
-              <input type="text"
-                required
-                className="form-control"
-                value={question.question}
-                onChange={(e) => {
-                  this.onChangeQuestion(e, index)
-                }}
-              />
+              <input type="text" required className="form-control" value={question.question} onChange={(e) => { this.onChangeQuestion(e, index) }} />
               {question.listofanswers.map((answer, aIndex) => (
                 aIndex === 0 ? (
                   <div key={"div" + aIndex} className="form-group">
                     <label key={"label" + aIndex}>Correct Answer: </label>
-                    <input
-                      key={"input" + aIndex}
-                      type="text"
-                      required
-                      className="form-control"
-                      value={answer}
-                      onChange={(e) => {
-                        this.onChangeAnswer(e, index, aIndex)
-                      }}
-                    />
+                    <input key={"input" + aIndex} type="text" required className="form-control" value={answer} onChange={(e) => { this.onChangeAnswer(e, index, aIndex) }} />
                   </div>
                 ) : (
                     <div key={"div" + aIndex} className="form-group">
                       <label key={"label" + aIndex}>Incorrect Answer {aIndex}: </label>
-                      <input
-                        key={"input" + aIndex}
-                        type="text"
-                        required
-                        className="form-control"
-                        value={answer}
-                        onChange={(e) => {
-                          this.onChangeAnswer(e, index, aIndex)
-                        }}
-                      />
+                      <input key={"input" + aIndex} type="text" required className="form-control" value={answer} onChange={(e) => { this.onChangeAnswer(e, index, aIndex) }} />
                     </div>
                   )
               ))}
               <br />
-              {this.state.listOfQuestions.length > 1 &&
-                <button type="button" onClick={() => this.deleteQuestion(index)}>Remove Question</button>
-              }
+              {this.state.listOfQuestions.length > 1 && <button type="button" onClick={() => this.deleteQuestion(index)}>Remove Question</button>}
             </div>
           ))}
+
           <button onClick={this.addQuestion}>Add Question</button>
           <br />
           <div className="radio">
             <label>
-              <input type="radio" value="private"
-                checked={this.state.scope === 'private'}
-                onChange={this.onChangeScope} />
+              <input type="radio" value="private" checked={this.state.scope === 'private'} onChange={this.onChangeScope} />
               Private
-      </label>
+            </label>
           </div>
           <div className="radio">
             <label>
-              <input type="radio" value="public"
-                checked={this.state.scope === 'public'}
-                onChange={this.onChangeScope} />
+              <input type="radio" value="public" checked={this.state.scope === 'public'} onChange={this.onChangeScope} />
               Public
-      </label>
+            </label>
           </div>
           <div className="form-group">
             <input type="submit" value="Sumbit" className="btn btn-primary" />

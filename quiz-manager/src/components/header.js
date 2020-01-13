@@ -10,7 +10,7 @@ var signOut = () => {
 class Header extends Component {
   async componentDidMount() {
     const id = getCookie('session')
-    if(id){
+    if (id) {
       let userProfile = await getUserFromId(id)
       this.setState({
         username: userProfile.username
@@ -26,17 +26,17 @@ class Header extends Component {
   }
 
   render() {
-    if(!getCookie('session')){
-          return ( 
-      <div className="header">
-        <a href="/" className="logo">Quiz Manager</a>
-        <div className="header-right">
-          <a className="active" href="/signin">Sign In</a>
+    if (!getCookie('session')) {
+      return (
+        <div className="header">
+          <a href="/" className="logo">Quiz Manager</a>
+          <div className="header-right">
+            <a className="active" href="/signin">Sign In</a>
+          </div>
         </div>
-      </div>
-    ) 
+      )
     } else {
-      return ( 
+      return (
         <div className="header">
           <a href="/" className="logo">Quiz Manager</a>
           <div className="header-right">
@@ -44,9 +44,9 @@ class Header extends Component {
           </div>
           <p className="header-right" >Hello {this.state.username}</p>
         </div>
-      ) 
+      )
     }
-  } 
+  }
 }
 
 export default (Header);

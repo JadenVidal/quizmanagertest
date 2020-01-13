@@ -32,57 +32,49 @@ export default class SigninPage extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-            const username = this.state.username
-            const password = btoa(this.state.password)
+        const username = this.state.username
+        const password = btoa(this.state.password)
 
-            Api.get(`users/${username}/${password}`)
-                .then(response => {
-                    if(response.data !== null){
+        Api.get(`users/${username}/${password}`)
+            .then(response => {
+                if (response.data) {
                     setCookie("session", response.data._id, 86400)
                     window.location.replace("/home")
-                    } else {
-                        this.setState({
-                            password: '',
-                            message: 'User not found'
-                        })
-                    }
-                })
-                .catch(error => {
-                    console.log(error.response.data)
+                } else {
                     this.setState({
-                        message: error.response.data
+                        password: '',
+                        message: 'User not found'
                     })
-                });
-       
+                }
+            })
+            .catch(error => {
+                this.setState({
+                    message: error.response.data
+                })
+            });
+
     }
     render() {
         return (
             <div >
                 <h3>Sign-In</h3>
+
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
-                        <input type="text"
-                            required
-                            className="form-control"
-                            value={this.state.username}
-                            onChange={this.onChangeUsername}
-                        />
+                        <input type="text" required className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
                     </div>
                     <div className="form-group">
                         <label>Password: </label>
-                        <input type="password"
-                            required
-                            className="form-control"
-                            value={this.state.password}
-                            onChange={this.onChangePassword}
-                        />
+                        <input type="password" required className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Sign In" className="btn btn-primary" />
                     </div>
                 </form>
+
                 <a href="/signup">Not a user? Sign Up</a>
+                
                 <p>{this.state.message}</p>
             </div>
         );

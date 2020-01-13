@@ -92,42 +92,23 @@ export default class SignupPage extends Component {
         return (
             <div >
                 <h3>Sign-Up</h3>
+
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
-                        <input type="text"
-                            required
-                            className="form-control"
-                            value={this.state.username}
-                            onChange={this.onChangeUsername}
-                        />
+                        <input type="text" required className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
                     </div>
                     <div className="form-group">
                         <label>Password: </label>
-                        <input type="password"
-                            required
-                            className="form-control"
-                            value={this.state.password}
-                            onChange={this.onChangePassword}
-                        />
+                        <input type="password" required className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
                         <label>Confirm Password: </label>
-                        <input type="password"
-                            required
-                            className="form-control"
-                            value={this.state.confirmpassword}
-                            onChange={this.onChangeConfirmPassword}
-                        />
+                        <input type="password" required className="form-control" value={this.state.confirmpassword} onChange={this.onChangeConfirmPassword}/>
                     </div>
                     <div className="form-group">
                         <label>School Key: </label>
-                        <input type="text"
-                            required
-                            className="form-control"
-                            value={this.state.key}
-                            onChange={this.onChangeKey}
-                        />
+                        <input type="text" required className="form-control" value={this.state.key} onChange={this.onChangeKey}/>
                         <p>The key should be provided by your school administrator</p>
                     </div>
                     <div className="form-group">

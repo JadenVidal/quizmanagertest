@@ -8,11 +8,8 @@ var redirectToCreatePage = () => {
 class CreateQuizButton extends Component {
 
   render() {
-      return ( 
-            <button onClick={redirectToCreatePage} type="button" className="block">Create Quiz</button>
-      ) 
+      return <button onClick={redirectToCreatePage} type="button" className="block">Create Quiz</button>
     }
-
   }
 
 export default (CreateQuizButton);

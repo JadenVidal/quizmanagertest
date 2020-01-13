@@ -101,7 +101,6 @@ class QuizDisplay extends Component {
       )
     }
   }
-
 }
 
 export default (QuizDisplay);

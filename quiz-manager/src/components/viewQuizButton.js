@@ -8,11 +8,8 @@ var redirectToViewPage = () => {
 class ViewQuizButton extends Component {
 
   render() {
-      return ( 
-            <button onClick={redirectToViewPage} type="button" className="block">View Quizes</button>
-      ) 
+      return <button onClick={redirectToViewPage} type="button" className="block">View Quizes</button>
     }
-
   }
 
 export default (ViewQuizButton);
